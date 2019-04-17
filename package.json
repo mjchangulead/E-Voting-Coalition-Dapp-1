@@ -1,0 +1,33 @@
+{
+  "name": "voting",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "npm": "^6.9.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-particles-js": "^2.1.0",
+    "react-scripts": "1.0.17",
+    "react-tilt": "^0.1.4",
+    "tachyons": "^4.9.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MeiChihChang/E-Voting-Coalition-Dapp.git"
+  },
+  "author": "mei chang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MeiChihChang/E-Voting-Coalition-Dapp/issues"
+  },
+  "homepage": "https://github.com/MeiChihChang/E-Voting-Coalition-Dapp#readme"
+}
