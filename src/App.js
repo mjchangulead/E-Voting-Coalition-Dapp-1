@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Particles from 'react-particles-js';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Navigation from './components/Navigation/Navigation';
@@ -7,7 +8,10 @@ import Register from './components/Register/Register';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
+import Friends from './components/Friends/Friends';
 import './App.css';
+
+import { submitShowIdea } from './actions'
 
 const particlesOptions = {
   particles: {
@@ -27,12 +31,26 @@ const initialState = {
   box: {},
   route: 'signin',
   isSignedIn: false,
+  clickuser: '',
+  isFaceDetect: false,
   user: {
     id: '',
     name: '',
     email: '',
     entries: 0,
     joined: ''
+  }
+}
+
+const mapStateToProps = state => {
+  return{
+    //user: state.submitShowIdea.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onButtonSubmit: () => dispatch(submitShowIdea())
   }
 }
 
@@ -107,26 +125,37 @@ class App extends Component {
   onRouteChange = (route) => {
     if (route === 'signout') {
       this.setState(initialState)
-    } else if (route === 'home') {
+    } else if ((route === 'friends')||(route === 'facedetect')) {
       this.setState({isSignedIn: true})
+      if (route === 'facedetect') {
+        this.setState({isFaceDetect: true})
+      } else {
+        this.setState({isFaceDetect: false})
+      }
     }
     this.setState({route: route});
   }
 
+  onSubmitIdea = (clickname) => {
+    this.setState({clickuser: clickname});
+    this.onRouteChange('facedetect');
+  }
+
   render() {
-    const { isSignedIn, imageUrl, route, box } = this.state;
+    const { isSignedIn, imageUrl, route, box, isFaceDetect } = this.state;
     return (
       <div className="App">
          <Particles className='particles'
           params={particlesOptions}
         />
-        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
-        { route === 'home'
+        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} isFaceDetect={isFaceDetect} />
+        { route === 'facedetect'
           ? <div>
               <Logo />
               <Rank
                 name={this.state.user.name}
                 entries={this.state.user.entries}
+                clickname={this.state.clickuser}
               />
               <ImageLinkForm
                 onInputChange={this.onInputChange}
@@ -135,9 +164,12 @@ class App extends Component {
               <FaceRecognition box={box} imageUrl={imageUrl} />
             </div>
           : (
-             route === 'signin'
-             ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-             : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+             route === 'register'
+             ? <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+             : (route === 'friends' 
+               ? <Friends onSubmitIdea={this.onSubmitIdea} />
+               : <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+              )
             )
         }
       </div>
@@ -145,4 +177,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
