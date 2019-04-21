@@ -13,7 +13,7 @@ class Friends extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount() { 
     fetch('https://murmuring-sea-22947.herokuapp.com/profile/all',  {
         method: 'post',
         headers: {'Content-Type': 'application/json'}
