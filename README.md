@@ -1,4 +1,4 @@
 # E-Voting-Coalition-Dapp
 
-### Accessable web-site
+### web-site
 https://e-voting-coalition-dapp.herokuapp.com/
