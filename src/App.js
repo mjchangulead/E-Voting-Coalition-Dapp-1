@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Particles from 'react-particles-js';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Navigation from './components/Navigation/Navigation';
@@ -10,8 +9,6 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import Friends from './components/Friends/Friends';
 import './App.css';
-
-import { submitShowIdea } from './actions'
 
 const particlesOptions = {
   particles: {
@@ -39,18 +36,6 @@ const initialState = {
     email: '',
     entries: 0,
     joined: ''
-  }
-}
-
-const mapStateToProps = state => {
-  return{
-    //user: state.submitShowIdea.user
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onButtonSubmit: () => dispatch(submitShowIdea())
   }
 }
 
@@ -177,4 +162,4 @@ class App extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
